@@ -1,0 +1,86 @@
+@CHARSET "UTF-8";
+
+.center {
+	text-align: center;
+}
+
+.full {
+	width: 100%
+}
+
+.user_icon {
+	width: 150px;
+	height: 150px;
+	border: thin solid 1px;
+}
+
+.gallery {
+	list-style-type: none;
+}
+
+.user_info {
+	margin-left: 50px;
+}
+
+.user_detail_line {
+	line-height: 30px;
+}
+
+.user_info_width {
+	width: 200px
+}
+
+.user_info_title {
+	background: #DCDDDE;
+	height: 30px;
+	line-height: 30px;
+	padding-left: 30px;
+}
+
+.user_info_introduce {
+	padding: 20px;
+	min-height: 150px;
+}
+
+.user_info_rank {
+	padding-left: 30px;
+	padding-bottom: 10px;
+}
+
+.color_font_gray {
+	color: #999;
+	font-size: 12px;
+}
+
+.request_padding {
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.request_content {
+	min-height: 150px;
+}
+
+.user_card {
+	float: left;
+	height: 120px;
+	width: auto;
+	margin-right: 20px;
+	margin-bottom: 20px;
+}
+
+
+.response_icon {
+	width: 30px;
+	height: 30px;
+}
+
+.reponse_user {
+	min-width: 100px;
+	margin-right: 10px;
+}
+
+.float_right {
+	float: right;
+}
+

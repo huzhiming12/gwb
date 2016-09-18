@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+    "http://struts.apache.org/dtds/struts-2.1.dtd">
+
+<struts>
+
+	<!-- <constant name="struts.devMode" value="false" /> -->
+
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+	<constant name="struts.multipart.maxSize" value="104857600" /><!--100M -->
+
+	<package name="User" namespace="/" extends="struts-default,json-default">
+		<action name="*_*" class="com.gwb.action.{1}Action" method="{2}">
+			<result type="json">
+				<param name="root">jsonResult</param>
+			</result>
+			<result name="wxPayOrder" type="plainText">
+			</result>
+			<result>/admin/{2}.jsp</result>
+		</action>
+	</package>
+
+	<package name="admin" namespace="/admin" extends="struts-default,json-default">
+		<action name="admin_*" class="com.gwb.admin.action.AdminAction"
+			method="{1}">
+			<result>/admin/{1}.jsp</result>
+		</action>
+		<action name="user_*" class="com.gwb.admin.action.UserAction"
+			method="{1}">
+			<result>/admin/{1}.jsp</result>
+			<result type="json" name="delUser">
+				<param name="root">jsonResult</param>
+			</result>
+			<result type="json" name="reviewUser">
+				<param name="root">jsonResult</param>
+			</result>
+		</action>
+		<action name="cons_*" class="com.gwb.admin.action.ConsultantAction"
+			method="{1}">
+			<result>/admin/{1}.jsp</result>
+			<result type="json" name="reviewConsultant">
+				<param name="root">jsonResult</param>
+			</result>
+			<result type="json" name="delConsultant">
+				<param name="root">jsonResult</param>
+			</result>
+		</action>
+		<action name="req_*" class="com.gwb.admin.action.RequestAction"
+			method="{1}">
+			<result>/admin/{1}.jsp</result>
+			<result type="json" name="closeRequest">
+				<param name="root">jsonResult</param>
+			</result>
+		</action>
+		<action name="order_*" class="com.gwb.admin.action.OrderAction"
+			method="{1}">
+			<result>/admin/{1}.jsp</result>
+		</action>
+		<action name="sale_*" class="com.gwb.admin.action.SaleAction"
+			method="{1}">
+			<result>/admin/{1}.jsp</result>
+		</action>
+		<action name="wallet_*" class="com.gwb.admin.action.WalletAction"
+			method="{1}">
+			<result>/admin/{1}.jsp</result>
+		</action>
+		<action name="feedback_*" class="com.gwb.admin.action.FeedbackAction"
+			method="{1}">
+			<result>/admin/{1}.jsp</result>
+		</action>
+		<action name="setting_*" class="com.gwb.admin.action.SettingAction"
+			method="{1}">
+			<result>/admin/{1}.jsp</result>
+		</action>
+		<action name="index_*" class="com.gwb.admin.action.IndexAction"
+			method="{1}">
+			<result>/admin/{1}.jsp</result>
+			<result name="login" type="redirectAction">user_userList</result>
+			<result name="logout" type="redirectAction">index_login</result>
+		</action>
+	</package>
+
+
+	<package name="default" namespace="/" extends="struts-default">
+		<action name="">
+			<result type="redirectAction">admin/index_login</result>
+		</action>
+	</package>
+
+
+</struts>

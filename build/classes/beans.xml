@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:task="http://www.springframework.org/schema/task" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/task 
+        http://www.springframework.org/schema/task/spring-task-3.0.xsd
+        http://www.springframework.org/schema/tx 
+        http://www.springframework.org/schema/tx/spring-tx.xsd">
+	<context:annotation-config />
+	<context:component-scan base-package="com" />
+	<!-- AOP面向切面编程 -->
+	<aop:aspectj-autoproxy />
+	<aop:config proxy-target-class="true"></aop:config>
+	<!-- <bean id="logInterceptor" class="com.hzm.spring.aop.LogInterceptor"></bean> 
+		<aop:config> <aop:aspect id="logAspect" ref="logInterceptor"> <aop:pointcut 
+		expression="execution(public * com.hzm.spring..*.saveUser(..))" id="myMethod" 
+		/> <aop:before method="before" pointcut-ref="myMethod" /> <aop:around method="around" 
+		pointcut-ref="myMethod" /> </aop:aspect> </aop:config> -->
+
+	<!-- <bean id="datasource" class="org.apache.commons.dbcp.BasicDataSource" 
+		destroy-method="close"> <property name="driverClassName" value="com.mysql.jdbc.Driver" 
+		/> <property name="url" value="jdbc:mysql://localhost:3306/bbs" /> <property 
+		name="username" value="root" /> <property name="password" value="123456" 
+		/> </bean> -->
+
+	<!-- 数据库连接池配置 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+	</bean>
+	<context:property-placeholder location="classpath:jdbc.properties" />
+
+	<!--sessionFactory配置 -->
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<!-- <property name="annotatedClasses"> <list> <value>com.hzm.spring.model.User</value> 
+			</list> </property> -->
+
+		<property name="packagesToScan">
+			<list>
+				<value>com.gwb.model</value>
+				<value>com.gwb.model.view</value>
+				<value>com.gwb.bean</value>
+			</list>
+		</property>
+
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.MySQLDialect
+				</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<!-- 当时用getCurrentSession时必须要加上 -->
+				<!-- <prop key="hibernate.current_session_context_class"> thread </prop> 
+					<prop key="hibernate.transaction.factory_class"> org.hibernate.transaction.JDBCTransactionFactory 
+					</prop> -->
+			</props>
+
+		</property>
+	</bean>
+
+	<!-- 将sessionFactory注入Spring事务管理类 -->
+	<bean id="txManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<!-- 开启Sping注释管理事务功能，指定事务管理的Bean -->
+	<tx:annotation-driven transaction-manager="txManager" />
+
+	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<!-- 开启这个配置，spring才能识别@Scheduled注解 -->
+	<task:annotation-driven scheduler="qbScheduler"
+		mode="proxy" />
+	<task:scheduler id="qbScheduler" pool-size="10" />
+
+</beans>
+
