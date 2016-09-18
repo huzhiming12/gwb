@@ -150,7 +150,7 @@ public class Alipay
 		{
 			total += bean.getMoney();
 			dataString += bean.getWithNo() + "^" + bean.getAccount() + "^" + bean.getName() + "^"
-					+ String.format("%.2f", 0.01) + "^提现|";
+					+ String.format("%.2f", bean.getMoney()) + "^提现|";
 		}
 		dataString = dataString.substring(0, dataString.length() - 1);
 		map.put("batch_fee", String.format("%.2f", total));

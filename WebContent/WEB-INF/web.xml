@@ -24,7 +24,7 @@
 
 	<!-- session 有效时间20分钟 -->
 	<session-config>
-		<session-timeout>120</session-timeout>
+		<session-timeout>0</session-timeout>
 	</session-config>
 
 	<!-- 使用struts2必须有的配置 -->

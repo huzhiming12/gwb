@@ -11,7 +11,20 @@
 	<constant name="struts.i18n.encoding" value="UTF-8" />
 	<constant name="struts.multipart.maxSize" value="104857600" /><!--100M -->
 
+
 	<package name="User" namespace="/" extends="struts-default,json-default">
+
+		<!-- 声明拦截器 -->
+		<interceptors>
+			<interceptor name="checkPrivilege" class="com.gwb.util.CheckPrivilegeInterceptor"></interceptor>
+
+			<interceptor-stack name="defaultStack">
+				<interceptor-ref name="checkPrivilege"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+
+
 		<action name="*_*" class="com.gwb.action.{1}Action" method="{2}">
 			<result type="json">
 				<param name="root">jsonResult</param>
@@ -23,6 +36,17 @@
 	</package>
 
 	<package name="admin" namespace="/admin" extends="struts-default,json-default">
+
+		<!-- 声明拦截器 -->
+		<interceptors>
+			<interceptor name="checkPrivilege" class="com.gwb.util.CheckPrivilegeInterceptor"></interceptor>
+
+			<interceptor-stack name="defaultStack">
+				<interceptor-ref name="checkPrivilege"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+
 		<action name="admin_*" class="com.gwb.admin.action.AdminAction"
 			method="{1}">
 			<result>/admin/{1}.jsp</result>

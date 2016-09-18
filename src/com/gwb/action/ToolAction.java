@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Random;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts2.ServletActionContext;
 import org.springframework.context.annotation.Scope;
@@ -19,6 +20,7 @@ import com.gwb.util.Config;
 import com.gwb.util.FileUtils;
 import com.gwb.util.ResultUtils;
 import com.gwb.util.SmsUtils;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 @Component("toolAction")
@@ -269,6 +271,15 @@ public class ToolAction extends ActionSupport
 			result.put("status", 400);
 			result.put("error", "反馈失败，稍后重试");
 		}
+		ResultUtils.toJson(ServletActionContext.getResponse(), result);
+	}
+	
+	//登录超时
+	public void notLogin()
+	{
+		Map<String, Object> result = new HashMap<>();
+		result.put("status", 400);
+		result.put("error", "登录超时，请重新登录！");
 		ResultUtils.toJson(ServletActionContext.getResponse(), result);
 	}
 }
