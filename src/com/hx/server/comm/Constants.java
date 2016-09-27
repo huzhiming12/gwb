@@ -1,6 +1,5 @@
 package com.hx.server.comm;
 
-import com.gwb.util.Config;
 import com.gwb.util.PropertiesUtils;
 
 /**

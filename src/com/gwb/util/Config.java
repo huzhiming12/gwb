@@ -9,7 +9,7 @@ import java.util.Properties;
 public final class Config
 {
 
-	public final static String Server_IP = "http://139.129.33.233:8080/";
+	public final static String Server_IP = "http://123.56.22.226:8080/";
 
 	// 每天可提现次数
 	public final static int WITHDRAW_NUM = 5;

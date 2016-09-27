@@ -15,20 +15,10 @@
         http://www.springframework.org/schema/tx/spring-tx.xsd">
 	<context:annotation-config />
 	<context:component-scan base-package="com" />
+	
 	<!-- AOP面向切面编程 -->
 	<aop:aspectj-autoproxy />
 	<aop:config proxy-target-class="true"></aop:config>
-	<!-- <bean id="logInterceptor" class="com.hzm.spring.aop.LogInterceptor"></bean> 
-		<aop:config> <aop:aspect id="logAspect" ref="logInterceptor"> <aop:pointcut 
-		expression="execution(public * com.hzm.spring..*.saveUser(..))" id="myMethod" 
-		/> <aop:before method="before" pointcut-ref="myMethod" /> <aop:around method="around" 
-		pointcut-ref="myMethod" /> </aop:aspect> </aop:config> -->
-
-	<!-- <bean id="datasource" class="org.apache.commons.dbcp.BasicDataSource" 
-		destroy-method="close"> <property name="driverClassName" value="com.mysql.jdbc.Driver" 
-		/> <property name="url" value="jdbc:mysql://localhost:3306/bbs" /> <property 
-		name="username" value="root" /> <property name="password" value="123456" 
-		/> </bean> -->
 
 	<!-- 数据库连接池配置 -->
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
@@ -72,10 +62,6 @@
 				</prop>
 				<prop key="hibernate.show_sql">true</prop>
 				<prop key="hibernate.hbm2ddl.auto">update</prop>
-				<!-- 当时用getCurrentSession时必须要加上 -->
-				<!-- <prop key="hibernate.current_session_context_class"> thread </prop> 
-					<prop key="hibernate.transaction.factory_class"> org.hibernate.transaction.JDBCTransactionFactory 
-					</prop> -->
 			</props>
 
 		</property>
