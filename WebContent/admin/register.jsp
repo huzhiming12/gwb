@@ -129,6 +129,19 @@
 				<tr id="fieldWarning" style="display: none;">
 					<td colspan="2" align="center" style="color: red">只能选择1-5擅长领域</td>
 				</tr>
+				
+				<tr>
+					<td style="width: 25%;" height="34" align="center">
+						<label class="control-label" for="inputPassword">个人资料:</label>
+					</td>
+					<td colspan="2" align="center">
+						<textarea name="consultant.introduction" style="width: 90%; height: 150px;" id="introduction" type="text"
+							placeholder="请输入个人资料（不少于100字个人经历总结）" ></textarea>
+					</td>
+				</tr>
+				<tr id="introductionWarning" style="display: none;">
+					<td colspan="2" align="center" style="color: red">个人资料不能少于100字</td>
+				</tr>
 
 
 				<tr>
@@ -299,6 +312,14 @@
 					flag = false;
 				} else
 					$("#fieldWarning").hide();
+				
+				//个人简介
+				var intro = $("#introduction").val();
+				if ( intro== "" ||intro.length<100 ) {
+					$("#introductionWarning").show();
+					flag = false;
+				} else
+					$("#introductionWarning").hide();
 
 				//验证码检验
 				if ($("#code").val() == "") {
