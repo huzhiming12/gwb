@@ -43,7 +43,8 @@ public class WXPay
 		payInfo.setNonce_str(WXUtils.createNonceStr());
 		payInfo.setBody("顾问帮一对一咨询服务");
 		payInfo.setOut_trade_no(orderId);
-		payInfo.setTotal_fee(1);
+		LogUtils.info("支付金额：" + money);
+		payInfo.setTotal_fee(money);
 		payInfo.setSpbill_create_ip(ip);
 		payInfo.setTime_start(DateUtil.DateToString(new Date(), "yyyyMMddHHmmss"));
 		// 获取签名
@@ -116,8 +117,8 @@ public class WXPay
 		RefundInfo refundInfo = new RefundInfo();
 		refundInfo.setOut_trade_no(orderId);
 		refundInfo.setOut_refund_no(refundId);
-		refundInfo.setTotal_fee(1);
-		refundInfo.setRefund_fee(1);
+		refundInfo.setTotal_fee(total_fee);
+		refundInfo.setRefund_fee(refund_fee);
 		// 产生随机数
 		refundInfo.setNonce_str(WXUtils.createNonceStr());
 		// 获取签名

@@ -329,6 +329,7 @@ public class OrderService
 	@Transactional
 	public Map<String, Object> prePayOrder(String orderId, String ip)
 	{
+		System.out.print("ihfoweihfowehfo");
 		OrderBean bean = orderDAO.loadOrderByOrderId(orderId);
 		return WXPay.payCharge(orderId, (int) (bean.getMoney() * 100), ip);
 	}

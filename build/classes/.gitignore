@@ -1,1 +1,10 @@
+/RestAPIConfig.properties
+/apiclient_cert.p12
+/beans.xml
 /com/
+/jdbc.properties
+/log4j.properties
+/rsa_private_key_pkcs8.pem
+/rsa_public_key.pem
+/setting.properties
+/struts.xml

@@ -47,7 +47,8 @@ public class Alipay
 		map.put("subject", "顾问咨询服务");
 		map.put("payment_type", "1");
 		map.put("seller_id", Config.AL_PID);
-		map.put("total_fee", "0.01");
+		LogUtils.info("支付金额：" + money + "\n");
+		map.put("total_fee", String.format("%.2f", money));
 		map.put("body", "顾问帮 顾问咨询服务");
 		String signString = AlipayUtils.mapToString(map);
 		// System.out.println(signString);
@@ -113,8 +114,7 @@ public class Alipay
 		String dataString = "";
 		for (RefundBean bean : refundBeans)
 		{
-			dataString += bean.getTradeNo() + "^"
-					+ String.format("%.2f", 0.01/* bean.getMoney() */) + "^refund#";
+			dataString += bean.getTradeNo() + "^" + String.format("%.2f", bean.getMoney()) + "^refund#";
 		}
 		dataString = dataString.substring(0, dataString.length() - 1);
 		map.put("detail_data", dataString);

@@ -38,6 +38,8 @@ p {
 		<input type="text" name="req.user.id">
 		<br> 请求方式：0：线上咨询 1：线下会面
 		<input type="text" name="req.consMode">
+		<br> 城市编号:
+		<input type="text" name="req.city.id">
 
 		<input type="submit" value="添加">
 	</form>
